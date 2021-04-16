@@ -102,7 +102,7 @@ pipeline{
             spec: '''{
                  "files": [
                              {
-                                "pattern": "target/*.war",
+                                "pattern": "target/*.jar",
                                 "target": "art-doc-dev-loco/java/"
                             }
                         ]
@@ -122,7 +122,7 @@ pipeline{
                      "files": [
                                 {
                                     "pattern": "art-doc-dev-loco/java/**",
-                                    "target": "app/artifacts/"      
+                                    "target": "artifacts/"      
                                 }
                             ]
               }"""
