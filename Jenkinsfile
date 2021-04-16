@@ -92,6 +92,44 @@ pipeline{
                 waitForQualityGate abortPipeline: true
             }
         }
+    stage('deploy to artifactory'){
+            steps{
+            script{
+                last_staged = env.STAGE_NAME
+                }
+                rtUpload (
+            serverId: 'ARTIFACTORY_SERVER',
+            spec: '''{
+                 "files": [
+                             {
+                                "pattern": "target/*.war",
+                                "target": "art-doc-dev-loco/java/"
+                            }
+                        ]
+            }''',
+            )
+            }
+        }
+        
+        stage('download artifact'){
+            steps{
+            script{
+                last_staged = env.STAGE_NAME
+                }
+                 rtDownload (
+                 serverId: "ARTIFACTORY_SERVER",
+                spec:"""{
+                     "files": [
+                                {
+                                    "pattern": "art-doc-dev-loco/java/**",
+                                    "target": "app/artifacts/"      
+                                }
+                            ]
+              }"""
+            )
+            
+            }
+        }
     } 
   post 
   {
