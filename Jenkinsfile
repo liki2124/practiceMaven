@@ -1,5 +1,6 @@
 pipeline{
-  agent none
+  //agent none
+  agent any
   options
   {
    timeout(time: 15, unit: 'MINUTES') 
@@ -63,21 +64,21 @@ pipeline{
 
     }
     }
-    stage ('sonar bulid and analysis')
-    {
-      agent {
- docker
-      {
-        image 'maven:3.8-jdk-11'
-        args '-v /root/.m2:/root/.m2'
-      }
-    }
-      steps
-      {
-        withSonarQubeEnv('sonarSpring') {
-                sh 'java -version'
-                sh 'mvn clean package sonar:sonar'
-              }
+  //  stage ('sonar bulid and analysis')
+    //{
+    //  agent {
+ //docker
+   //   {
+     //   image 'maven:3.8-jdk-11'
+       // args '-v /root/.m2:/root/.m2'
+      //}
+    //}
+      //steps
+      //{
+        //withSonarQubeEnv('sonarSpring') {
+               // sh 'java -version'
+                //sh 'mvn clean package sonar:sonar'
+              /*}
       }
     }
     stage("Quality gate") {
@@ -130,7 +131,7 @@ pipeline{
             
             }
         }
-    } 
+    } */
   post 
   {
     always
