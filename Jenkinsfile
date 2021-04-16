@@ -31,7 +31,7 @@ pipeline{
    // }
       steps
       {
-      sh 'mvn compile'
+      bat 'mvn compile'
       }
        post
     {
@@ -53,7 +53,7 @@ pipeline{
    // }
       steps
       {
-      sh 'mvn package'
+      bat 'mvn package'
       }
        post
     {
@@ -76,8 +76,8 @@ pipeline{
       steps
       {
         withSonarQubeEnv('sonarSpring') {
-                sh 'java -version'
-                sh 'mvn clean package sonar:sonar'
+                bat 'java -version'
+                bat 'mvn clean package sonar:sonar'
               }
       }
     }
