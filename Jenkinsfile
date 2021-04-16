@@ -75,7 +75,7 @@ pipeline{
   //  }
       steps
       {
-        withSonarQubeEnv('sonarSpring') {
+        withSonarQubeEnv('sonarserver') {
                 bat 'java -version'
                 bat 'mvn clean package sonar:sonar'
               }
