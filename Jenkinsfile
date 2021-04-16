@@ -22,13 +22,13 @@ pipeline{
     }
     stage("build")
     {
-    agent {
- docker
-      {
-        image 'maven:3.8-jdk-11'
-        args '-v /root/.m2:/root/.m2'
-      }
-    }
+   // agent {
+ //docker
+      //{
+      //  image 'maven:3.8-jdk-11'
+       // args '-v /root/.m2:/root/.m2'
+      //}
+   // }
       steps
       {
       sh 'mvn compile'
@@ -44,13 +44,13 @@ pipeline{
     }
    stage ('package')
     {
-      agent {
- docker
-      {
-        image 'maven:3.8-jdk-11'
-        args '-v /root/.m2:/root/.m2'
-      }
-    }
+     // agent {
+// docker
+    //  {
+       // image 'maven:3.8-jdk-11'
+       // args '-v /root/.m2:/root/.m2'
+     // }
+   // }
       steps
       {
       sh 'mvn package'
@@ -64,31 +64,31 @@ pipeline{
 
     }
     }
-  //  stage ('sonar bulid and analysis')
-    //{
-    //  agent {
- //docker
-   //   {
+    stage ('sonar bulid and analysis')
+    {
+     // agent {
+// docker
+     // {
      //   image 'maven:3.8-jdk-11'
-       // args '-v /root/.m2:/root/.m2'
-      //}
-    //}
-      //steps
-      //{
-        //withSonarQubeEnv('sonarSpring') {
-               // sh 'java -version'
-                //sh 'mvn clean package sonar:sonar'
-              /*}
+     //   args '-v /root/.m2:/root/.m2'
+     // }
+  //  }
+      steps
+      {
+        withSonarQubeEnv('sonarSpring') {
+                sh 'java -version'
+                sh 'mvn clean package sonar:sonar'
+              }
       }
     }
     stage("Quality gate") {
-      agent {
- docker
-      {
-        image 'maven:3.8-jdk-11'
-        args '-v /root/.m2:/root/.m2'
-      }
-    }
+     // agent {
+// docker
+     // {
+       // image 'maven:3.8-jdk-11'
+      //  args '-v /root/.m2:/root/.m2'
+    //  }
+   // }
             steps {
                 waitForQualityGate abortPipeline: true
             }
@@ -130,7 +130,8 @@ pipeline{
             )
             
             }
-        }*/
+        }
+    } 
   post 
   {
     always
@@ -172,5 +173,4 @@ echo "previous build is failed and current build is successful!!"
       echo "if previous posts are excuted then only this will be executed!"
     }
   }
-}
 }
